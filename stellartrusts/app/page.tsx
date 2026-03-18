@@ -3,10 +3,13 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, ShieldCheck, Zap, Globe, Layers } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useWallet } from "@/components/WalletProvider";
 
 export default function Home() {
   const { address, connectWallet } = useWallet();
+
+  const router = useRouter();
 
   const features = [
     {
@@ -30,6 +33,14 @@ export default function Home() {
       desc: "Impartial arbitration handled transparently on-chain. Fair resolution for any disagreements."
     }
   ];
+
+  const handleCardClick = () => {
+    if (address) {
+      router.push("/dashboard");
+    } else {
+      connectWallet();
+    }
+  };
 
   return (
     <div className="flex flex-col items-center pt-24 pb-16">
@@ -83,9 +94,10 @@ export default function Home() {
         className="mt-32 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full"
       >
         {features.map((feature, idx) => (
-          <div
+          <button
             key={idx}
-            className="p-8 rounded-2xl bg-card/60 border border-border/50 hover:border-accent/40 backdrop-blur-md transition-all hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(108,92,231,0.1)] group relative overflow-hidden"
+            onClick={handleCardClick}
+            className="p-8 rounded-2xl bg-card/60 border border-border/50 hover:border-accent/40 backdrop-blur-md transition-all hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(108,92,231,0.1)] group relative overflow-hidden text-left cursor-pointer w-full focus:outline-none focus:ring-2 focus:ring-accent"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl group-hover:bg-accent/20 transition-all" />
             <div className="mb-6 bg-black/50 w-16 h-16 rounded-xl flex items-center justify-center border border-border shadow-inner">
@@ -95,7 +107,7 @@ export default function Home() {
             <p className="text-gray-400 leading-relaxed text-sm">
               {feature.desc}
             </p>
-          </div>
+          </button>
         ))}
       </motion.div>
     </div>

@@ -51,6 +51,13 @@ The vision of StellarTrust is to create a decentralized freelance escrow infrast
 - **DisputeResolver**: A module governing specialized conflict resolution scenarios.
 
 *Security Features*: Reentrancy protection, Time-locked withdrawals, On-chain transparent transaction logs.
+---
+
+## 👥 User Roles System
+The protocol enforces a clear separation of responsibilities symmetrically across three distinct entities:
+- **Client**: Initiates the project, deposits initial milestone funds, reviews work, and approves the final release of funds.
+- **Freelancer**: Accepts the project scope, completes milestone deliverables, and tracks transparent on-chain payouts.
+- **Arbitrator**: Serves as an impartial third-party entity configured during multi-signature deployment, stepping in only during disputes to mediate and allocate locked funds.
 
 ---
 
