@@ -1,0 +1,227 @@
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1000px;
+}
+
+.headerCard {
+  background: linear-gradient(135deg, rgba(30, 30, 45, 0.8) 0%, rgba(26, 26, 36, 0.9) 100%);
+  border: 1px solid #2d2d3d;
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.leftSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.projectTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.badgeActive {
+  background-color: #1b4733;
+  color: #4ade80;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.usersInfo {
+  font-size: 15px;
+  color: #a0a0b2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.financeSection {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.budgetAmount {
+  font-size: 32px;
+  font-weight: 700;
+  color: #4ade80;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.budgetLabel {
+  font-size: 14px;
+  color: #a0a0b2;
+}
+
+.milestonesCard {
+  background-color: #1a1a24;
+  border: 1px solid #2d2d3d;
+  border-radius: 16px;
+  padding: 32px;
+}
+
+.sectionHeading {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 24px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.milestoneList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.milestoneItem {
+  background-color: #1e1e2d;
+  border: 1px solid #2d2d3d;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.milestoneItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-color: #3d3d52;
+}
+
+.completed {
+  border-left: 4px solid #4ade80;
+}
+
+.active {
+  border-left: 4px solid #6366f1;
+}
+
+.pending {
+  border-left: 4px solid #3d3d52;
+}
+
+.mLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.mDesc {
+  font-size: 14px;
+  color: #a0a0b2;
+  margin: 0;
+}
+
+.mRight {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.mAmount {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.primaryButton {
+  background-color: #6366f1;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.primaryButton:hover {
+  background-color: #4f46e5;
+}
+
+.successButton {
+  background-color: #1b4733;
+  color: #4ade80;
+  border: 1px solid #4ade80;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.successButton:hover {
+  background-color: #4ade80;
+  color: #000000;
+}
+
+.dangerButton {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dangerButton:hover {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.actionRow {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #2d2d3d;
+}
