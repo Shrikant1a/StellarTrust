@@ -1,6 +1,6 @@
 'use client';
 
-import React, { use } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import styles from './DisputeDetails.module.css';
 import { 
@@ -15,12 +15,11 @@ import {
 import globalStyles from '../../Dashboard.module.css';
 
 interface PageProps {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }
 
 export default function DisputeDetailsPage({ params }: PageProps) {
-  // Required in Next.js 15+ when using dynamic route segments
-  const resolvedParams = use(params);
+
   
   return (
     <>
@@ -28,7 +27,7 @@ export default function DisputeDetailsPage({ params }: PageProps) {
         <div>
           <h1 className={globalStyles.sectionTitle}>Dispute Details</h1>
           <p className={globalStyles.pageSubtitle}>
-            <Link href="/disputes" style={{ color: '#a0a0b2', textDecoration: 'none' }}>Disputes</Link> / #{resolvedParams.id}
+            <Link href="/disputes" style={{ color: '#a0a0b2', textDecoration: 'none' }}>Disputes</Link> / #{params.id}
           </p>
         </div>
       </div>
