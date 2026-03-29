@@ -81,6 +81,12 @@ impl TrustlanceEscrowContract {
     /// Client deposits the total budget for the project into the contract.
     pub fn deposit_funds(env: Env, project_id: u64) {
         let mut project: Project = env.storage().persistent().get(&DataKey::Project(project_id)).unwrap();
+        
+        // SECURITY: Ensure project is in Created state before funding
+        if project.status != ProjectStatus::Created {
+            panic!("Project already funded or in progress");
+        }
+        
         project.client.require_auth();
 
         let token_client = token::Client::new(&env, &project.token);
@@ -93,6 +99,12 @@ impl TrustlanceEscrowContract {
     /// Client releases a specific milestone payment to the freelancer.
     pub fn release_milestone(env: Env, project_id: u64, milestone_index: u32) {
         let mut project: Project = env.storage().persistent().get(&DataKey::Project(project_id)).unwrap();
+        
+        // SECURITY: Ensure project is funded
+        if project.status == ProjectStatus::Created {
+            panic!("Project must be funded first");
+        }
+
         project.client.require_auth();
 
         let mut milestone = project.milestones.get(milestone_index).unwrap();
@@ -109,7 +121,11 @@ impl TrustlanceEscrowContract {
         token_client.transfer(&env.current_contract_address(), &project.freelancer, &milestone.amount);
 
         project.milestones.set(milestone_index, milestone);
-        project.status = ProjectStatus::InProgress;
+        
+        // Update status to InProgress if it was just Funded
+        if project.status == ProjectStatus::Funded {
+            project.status = ProjectStatus::InProgress;
+        }
 
         // Check if all milestones are approved
         let mut all_approved = true;
@@ -127,9 +143,15 @@ impl TrustlanceEscrowContract {
         env.storage().persistent().set(&DataKey::Project(project_id), &project);
     }
 
-    /// Raise a dispute for a specific milestone. Can be called by anyone (client/freelancer)
-    pub fn raise_dispute(env: Env, project_id: u64, milestone_index: u32) {
+    /// Raise a dispute for a specific milestone. Can be called by client or freelancer.
+    pub fn raise_dispute(env: Env, project_id: u64, milestone_index: u32, caller: Address) {
         let mut project: Project = env.storage().persistent().get(&DataKey::Project(project_id)).unwrap();
+        
+        // SECURITY: Only client or freelancer can raise a dispute
+        caller.require_auth();
+        if caller != project.client && caller != project.freelancer {
+            panic!("Unauthorized: Only client or freelancer can dispute");
+        }
         
         project.status = ProjectStatus::Dispute;
         let mut milestone = project.milestones.get(milestone_index).unwrap();

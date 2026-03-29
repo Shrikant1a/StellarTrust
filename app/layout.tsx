@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import DashboardLayout from "../components/DashboardLayout";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -38,6 +40,8 @@ export default function RootLayout({
         <DashboardLayout>
           {children}
         </DashboardLayout>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
