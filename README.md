@@ -14,6 +14,7 @@ Trustlance is a decentralized cross-border milestone escrow platform built on th
 - [x] **Public GitHub Repository:** [Shrikant1a/StellarTrust](https://github.com/Shrikant1a/StellarTrust)
 - [x] **Live Demo:** [stellar-trust.vercel.app](https://stellar-trust.vercel.app/)
 - [x] **10+ Meaningful Commits:** Verified (11 total as of March 29, 2026)
+  ![Commit History](./public/commit-history.png)
 - [x] **Demo Video:** Included
 - [x] **Testnet Users:** 5+ Verifiable wallet addresses listed below
 - [x] **User Feedback:** Google Form & spreadsheet responses linked
