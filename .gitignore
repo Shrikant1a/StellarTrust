@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Rust build artifacts
+target/
+**/target/
+*.bak
+deploy_output.txt
+

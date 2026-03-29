@@ -1,6 +1,6 @@
 'use client';
 
-import React, { use, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './ProjectDetails.module.css';
 import { 
@@ -13,12 +13,11 @@ import {
 import globalStyles from '../../Dashboard.module.css';
 
 interface PageProps {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }
 
 export default function ProjectDetailsPage({ params }: PageProps) {
-  // Required in Next.js 15+ when using dynamic route segments
-  const resolvedParams = use(params);
+
 
   // States to make the buttons workable
   const [milestone3Status, setMilestone3Status] = useState<'active' | 'processing' | 'completed'>('active');
@@ -36,7 +35,7 @@ export default function ProjectDetailsPage({ params }: PageProps) {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        const customProj = parsed.find((p: any) => p.linkId === resolvedParams.id || p.id === resolvedParams.id);
+        const customProj = parsed.find((p: any) => p.linkId === params.id || p.id === params.id);
         if (customProj) {
           setProjectData({
             title: customProj.name,
@@ -46,7 +45,7 @@ export default function ProjectDetailsPage({ params }: PageProps) {
         }
       } catch (e) {}
     }
-  }, [resolvedParams.id]);
+  }, [params.id]);
 
   const completedCount = 2 + (milestone3Status === 'completed' ? 1 : 0) + (milestone4Status === 'completed' ? 1 : 0);
 
@@ -76,7 +75,7 @@ export default function ProjectDetailsPage({ params }: PageProps) {
         <div>
           <h1 className={globalStyles.sectionTitle}>Project Details</h1>
           <p className={globalStyles.pageSubtitle}>
-            <Link href="/projects" style={{ color: '#a0a0b2', textDecoration: 'none' }}>Projects</Link> / {resolvedParams.id}
+            <Link href="/projects" style={{ color: '#a0a0b2', textDecoration: 'none' }}>Projects</Link> / {params.id}
           </p>
         </div>
       </div>
