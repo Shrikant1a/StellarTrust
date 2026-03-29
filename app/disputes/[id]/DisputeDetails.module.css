@@ -1,0 +1,234 @@
+/* app/disputes/[id]/DisputeDetails.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1000px;
+}
+
+.headerCard {
+  background: linear-gradient(135deg, rgba(30, 30, 45, 0.8) 0%, rgba(26, 26, 36, 0.9) 100%);
+  border: 1px solid #2d2d3d;
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.badgeDispute {
+  background-color: #7f1d1d;
+  color: #fca5a5;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.usersInfo {
+  font-size: 15px;
+  color: #a0a0b2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.amountBox {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.amountValue {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ef4444;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.amountLabel {
+  font-size: 14px;
+  color: #a0a0b2;
+}
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.panel {
+  background-color: #1a1a24;
+  border: 1px solid #2d2d3d;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.panelTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #2d2d3d;
+  padding-bottom: 16px;
+}
+
+.chatBox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.chatMessage {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 85%;
+}
+
+.chatMessage.sender {
+  align-self: flex-start;
+}
+
+.chatMessage.receiver {
+  align-self: flex-end;
+  text-align: right;
+}
+
+.chatBubble {
+  background-color: #2b2b3f;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #3d3d52;
+  font-size: 14px;
+  color: #d1d5db;
+  line-height: 1.5;
+}
+
+.chatMessage.sender .chatBubble {
+  border-bottom-left-radius: 4px;
+}
+
+.chatMessage.receiver .chatBubble {
+  background-color: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.3);
+  border-bottom-right-radius: 4px;
+}
+
+.chatMeta {
+  font-size: 12px;
+  color: #6c6c80;
+  display: flex;
+  gap: 8px;
+}
+
+.chatMessage.receiver .chatMeta {
+  justify-content: flex-end;
+}
+
+.actionPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.actionButton {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  border: none;
+}
+
+.actionClient {
+  background-color: rgba(74, 222, 128, 0.1);
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.actionClient:hover {
+  background-color: #4ade80;
+  color: #000000;
+}
+
+.actionFreelancer {
+  background-color: rgba(99, 102, 241, 0.1);
+  color: #818cf8;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.actionFreelancer:hover {
+  background-color: #6366f1;
+  color: #ffffff;
+}
+
+.actionSplit {
+  background-color: rgba(234, 179, 8, 0.1);
+  color: #facc15;
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.actionSplit:hover {
+  background-color: #eab308;
+  color: #000000;
+}
+
+.documentList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.documentItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #1e1e2d;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #2d2d3d;
+  color: #a0a0b2;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.documentItem:hover {
+  background-color: #2b2b3f;
+  color: #ffffff;
+}
