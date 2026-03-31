@@ -6,10 +6,10 @@ import styles from '../Dashboard.module.css';
 
 export default function ProjectsPage() {
   const defaultProjects = [
-    { id: 'default-1', name: 'Website Redesign', client: 'Alice', freelancer: 'James Carter', status: 'Active', statusClass: 'badgeActive', linkId: '1' },
-    { id: 'default-2', name: 'Mobile App Development', client: 'David', freelancer: 'Sarah Lee', status: 'In Progress', statusClass: 'badgeInProgress', linkId: '2' },
-    { id: 'default-3', name: 'Blockchain Integration', client: 'Michael', freelancer: 'Alex Smith', status: 'Active', statusClass: 'badgeActive', linkId: '3' },
-    { id: 'default-4', name: 'SEO Optimization', client: 'Emma', freelancer: 'John Doe', status: 'Dispute', statusClass: 'badgeDispute', linkId: '4' },
+    { id: 'default-1', name: 'Website Redesign', client: 'Alice', freelancer: 'James Carter', status: 'Active', statusClass: 'badgeActive', linkId: '1', budget: '4500', currency: 'XLM' },
+    { id: 'default-2', name: 'Mobile App Development', client: 'David', freelancer: 'Sarah Lee', status: 'In Progress', statusClass: 'badgeInProgress', linkId: '2', budget: '8000', currency: 'XLM' },
+    { id: 'default-3', name: 'Blockchain Integration', client: 'Michael', freelancer: 'Alex Smith', status: 'Active', statusClass: 'badgeActive', linkId: '3', budget: '12000', currency: 'XLM' },
+    { id: 'default-4', name: 'SEO Optimization', client: 'Emma', freelancer: 'John Doe', status: 'Dispute', statusClass: 'badgeDispute', linkId: '4', budget: '1500', currency: 'XLM' },
   ];
 
   const [projects, setProjects] = useState(defaultProjects);

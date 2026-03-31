@@ -67,54 +67,24 @@ export default function ProjectDetailsPage({ params }: PageProps) {
     (milestone3Status === 'completed' ? 1 : 0) + 
     (milestone4Status === 'completed' ? 1 : 0);
 
-  const logTransaction = (amount: string, type: 'Send' | 'Release', receiver: string) => {
-    const balance = localStorage.getItem('trustlance_mvp_balance') || '1000.00';
-    const newBalance = (parseFloat(balance) - parseFloat(amount)).toFixed(2);
-    localStorage.setItem('trustlance_mvp_balance', newBalance);
-
-    const txs = JSON.parse(localStorage.getItem('trustlance_mvp_transactions') || '[]');
-    const newTx = {
-      id: `tx-${Date.now()}`,
-      created_at: new Date().toISOString(),
-      type: type,
-      amount: amount,
-      asset: projectData.currency,
-      to: receiver,
-      project: projectData.title,
-      status: 'Success'
-    };
-    localStorage.setItem('trustlance_mvp_transactions', JSON.stringify([newTx, ...txs]));
-    
-    // Also notify the user
-    console.log(`Transaction logged: ${amount} ${projectData.currency} sent to ${receiver}`);
-  };
-
   const handleApproveM1 = () => {
     setMilestone1Status('processing');
-    const amount = (Number(projectData.budget) * 0.2).toFixed(1);
-    
     setTimeout(() => {
       setMilestone1Status('completed');
       setMilestone2Status('active');
-      logTransaction(amount, 'Release', projectData.freelancer);
     }, 1500);
   };
 
   const handleApproveM2 = () => {
     setMilestone2Status('completed');
     setMilestone3Status('active');
-    const amount = (Number(projectData.budget) * 0.3).toFixed(1);
-    logTransaction(amount, 'Release', projectData.freelancer);
   };
 
   const handleApproveM3 = () => {
     setMilestone3Status('processing');
-    const amount = (Number(projectData.budget) * 0.3).toFixed(1);
-    
     setTimeout(() => {
       setMilestone3Status('completed');
       setMilestone4Status('active');
-      logTransaction(amount, 'Release', projectData.freelancer);
     }, 1500);
   };
 

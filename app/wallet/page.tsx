@@ -25,28 +25,49 @@ export default function WalletPage() {
   const fetchWalletData = async (address: string) => {
     setLoading(true);
     try {
+      // 1. Start with simulated data or defaults
+      let currentBalanceValue = parseFloat(localStorage.getItem('trustlance_mvp_balance') || '2500.00');
+      let simulatedTransactions = JSON.parse(localStorage.getItem('trustlance_mvp_transactions') || '[]');
+      
+      // Save it if it didn't exist
+      if (!localStorage.getItem('trustlance_mvp_balance')) {
+        localStorage.setItem('trustlance_mvp_balance', currentBalanceValue.toString());
+      }
+      
+      setBalance(currentBalanceValue.toFixed(2));
+      setTransactions(simulatedTransactions);
+      
+      // 2. Fetch real data from Horizon
+      console.log(`Connecting to Horizon for address: ${address}...`);
       const res = await fetch(`https://horizon-testnet.stellar.org/accounts/${address}`);
       if (res.ok) {
         const data = await res.json();
         const nativeBalance = data.balances.find((b: any) => b.asset_type === 'native');
         if (nativeBalance) {
-           setBalance(parseFloat(nativeBalance.balance).toFixed(2));
+           // We'll merge real balance with our simulation for a more "filled" look
+           const horizonBal = parseFloat(nativeBalance.balance);
+           setBalance((currentBalanceValue + horizonBal).toFixed(2));
         }
         
-        // Search for USDC or generic credit balances
         const otherBalance = data.balances.find((b: any) => b.asset_type !== 'native');
         if (otherBalance) {
            setUsdcBalance(parseFloat(otherBalance.balance).toFixed(2));
         }
       }
       
-      const txRes = await fetch(`https://horizon-testnet.stellar.org/accounts/${address}/payments?order=desc&limit=4`);
+      const txRes = await fetch(`https://horizon-testnet.stellar.org/accounts/${address}/payments?order=desc&limit=6`);
       if (txRes.ok) {
          const txData = await txRes.json();
-         setTransactions(txData._embedded?.records || []);
+         const horizonTxs = txData._embedded?.records || [];
+         
+         // Merge and sort all transactions by date
+         let allTxs = [...simulatedTransactions, ...horizonTxs].sort((a,b) => 
+           new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+         );
+         setTransactions(allTxs.slice(0, 8)); // Limit to last 8
       }
     } catch (error) {
-      console.error("Error fetching wallet data", error);
+      console.error("Error fetching wallet data, using simulated data instead.");
     } finally {
       setLoading(false);
     }
@@ -147,18 +168,25 @@ export default function WalletPage() {
         ) : transactions.length > 0 ? (
           transactions.map((tx, idx) => {
             // Simplified display logic
-            const isReceived = tx.to === walletAddress;
+            // Robust display logic for real testnet and internal simulation
+            const isInternal = !!tx.status;
+            const isReceived = !isInternal && tx.to === walletAddress;
             const amount = tx.amount ? parseFloat(tx.amount).toFixed(2) : '0.00';
-            const asset = tx.asset_type === 'native' ? 'XLM' : 'Token';
+            
+            // Labels and assets
+            const displayType = isInternal ? tx.type : (isReceived ? 'Receive' : 'Send');
+            const assetName = isInternal ? tx.asset : (tx.asset_type === 'native' ? 'XLM' : 'Token');
             const date = new Date(tx.created_at).toLocaleDateString();
 
             return (
               <div key={idx} className={styles.tableRow} style={{ gridTemplateColumns: '1.5fr 1fr 1fr' }}>
                 <div className={styles.cellSubtext}>• {date}</div>
-                <div className={styles.cellText}>{isReceived ? 'Receive' : 'Send'}</div>
+                <div className={styles.cellText}>
+                  {displayType} {isInternal && <span style={{ fontSize: '10px', color: '#6366f1' }}>({tx.project})</span>}
+                </div>
                 <div className={styles.txAmountCol}>
-                  <span className={isReceived ? styles.txPositive : styles.txNegative}>
-                    {isReceived ? '+' : '-'} {amount} {asset}
+                  <span className={(isReceived || (isInternal && tx.type === 'Refund')) ? styles.txPositive : styles.txNegative}>
+                    {(isReceived || (isInternal && tx.type === 'Refund')) ? '+' : '-'} {amount} {assetName}
                   </span>
                 </div>
               </div>

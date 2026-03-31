@@ -18,7 +18,8 @@ import {
   ChevronRight,
   Zap,
   Camera,
-  Menu
+  Menu,
+  Users
 } from 'lucide-react';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -114,6 +115,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <Link href="/wallet" onClick={() => setIsMobileMenuOpen(false)} className={`${styles.navItem} ${pathname === '/wallet' ? styles.active : ''}`}>
             <Wallet size={20} className={pathname === '/wallet' ? styles.activeIcon : ''} />
             Wallet
+          </Link>
+          <Link href="/community" onClick={() => setIsMobileMenuOpen(false)} className={`${styles.navItem} ${pathname === '/community' ? styles.active : ''}`}>
+            <Users size={20} className={pathname === '/community' ? styles.activeIcon : ''} />
+            Community
+          </Link>
+          <Link href="/monitoring" onClick={() => setIsMobileMenuOpen(false)} className={`${styles.navItem} ${pathname === '/monitoring' ? styles.active : ''}`}>
+             <Search size={20} className={pathname === '/monitoring' ? styles.activeIcon : ''} />
+             Monitoring
           </Link>
         </nav>
 

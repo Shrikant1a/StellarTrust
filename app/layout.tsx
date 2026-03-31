@@ -16,8 +16,10 @@ const robotoMono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "StellarTrust Dashboard",
-  description: "Decentralized Escrow and Project Management",
+  title: "Trustlance | Secure Milestone Escrow on Stellar",
+  description: "The premier decentralized cross-border milestone escrow platform built on Stellar Soroban. Secure, fast, and trustless payments for freelancers and clients.",
+  keywords: ["Stellar", "Soroban", "Escrow", "Freelancing", "Smart Contracts", "Web3", "Blockchain"],
+  authors: [{ name: "Trustlance Team" }],
 };
 
 export const viewport: Viewport = {

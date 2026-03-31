@@ -8,9 +8,12 @@ import styles from '../../Dashboard.module.css';
 export default function CreateProjectPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  
   const [projectTitle, setProjectTitle] = useState('');
   const [clientName, setClientName] = useState('');
   const [freelancerName, setFreelancerName] = useState('');
+  const [budget, setBudget] = useState('500');
+  const [currency, setCurrency] = useState('XLM');
   const [isCreating, setIsCreating] = useState(false);
 
   useEffect(() => {
@@ -74,6 +77,7 @@ export default function CreateProjectPage() {
               type="text"
               placeholder="Total Milestones"
               className={styles.formInput}
+              defaultValue="2"
             />
             <div style={{ display: 'flex', gap: '8px' }}>
               <input
@@ -81,9 +85,17 @@ export default function CreateProjectPage() {
                 placeholder="Total Value"
                 className={styles.formInput}
                 style={{ flex: 1 }}
+                value={budget}
+                onChange={(e) => setBudget(e.target.value)}
               />
-              <select className={styles.formSelect} style={{ width: '100px' }} defaultValue="USD">
-                <option value="USD">USD</option>
+              <select 
+                className={styles.formSelect} 
+                style={{ width: '100px' }} 
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value)}
+              >
+                <option value="XLM">XLM</option>
+                <option value="USDC">USDC</option>
                 <option value="ETH">ETH</option>
               </select>
             </div>
@@ -131,7 +143,11 @@ export default function CreateProjectPage() {
                 freelancer: freelancerName || 'Unknown Freelancer',
                 status: 'Active',
                 statusClass: 'badgeActive',
-                linkId: newId
+                linkId: newId,
+                budget: budget || '0',
+                currency: currency || 'XLM',
+                isCustom: true,
+                createdAt: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
               };
               
               const existing = JSON.parse(localStorage.getItem('trustlance_projects') || '[]');
