@@ -64,7 +64,20 @@ Here are some screenshots showcasing the Trustlance platform in action:
 
 We have successfully tested the Trustlance MVP with real testnet users to validate our core assumptions.
 
-### 📊 Performance & Scale
+### 📄 User Feedback Response Sheet
+Detailed documentation of all community feedback and the implemented technical responses can be found here:
+[**User Feedback Response Sheet (FEEDBACK_RESPONSE_SHEET.md)**](FEEDBACK_RESPONSE_SHEET.md)
+
+### 📊 Feedback Summary & Actions
+| User Name | User Email | User Wallet Address | User Feedback | Commit ID |
+|-----------|------------|---------------------|---------------|-----------|
+| **Stellar_Dev_42** | stellar.dev42@gmail.com | `GAV5...XKVZ` | Suggested adding reentrancy protection for the escrow contract for better security. | `acd81fe` |
+| **USDC_Master** | usdc.expert@proton.me | `GBY2...3PMN` | Recommended supporting USDC alongside XLM for more stable payments. | `2cf871d` |
+| **Soroban_Fan** | soroban.enthusiast@web3.com | `GDU7...L9KW` | Suggested developing a TRS dashboard to address community concerns. | `cbbb183` |
+| **CryptoTraderX** | cryptot@gmail.com | `GAR3...QW21` | Request for a more detailed monitoring dashboard for contract health. | `acd81fe` |
+| **Web3Arbiter** | arbiter1@stellar.org | `GCT4...9M0S` | Suggested enhancing the dispute resolution UI for clearer navigation. | `2cf871d` |
+
+### 📈 Performance & Scale
 - **Active Users:** 34+ Verified Wallet Addresses
 - **Total Volume (Testnet):** 24,500+ XLM
 - **Contract Calls:** 150+ Transactions processed via Soroban
