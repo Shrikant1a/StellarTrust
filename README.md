@@ -10,6 +10,14 @@ Trustlance is a decentralized cross-border milestone escrow platform built on th
 - **Live Demo:** [**Click here to view the Live Demo**](https://stellar-trust.vercel.app/)
 - **Demo Video:** [https://youtu.be/MeLgaa3WBPs](https://youtu.be/MeLgaa3WBPs)
 
+## 📜 Smart Contract Details
+
+- **Contract ID:** `CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y`
+- **Network:** Stellar Testnet
+- **Explorer (Soroban):** [View on Soroban Explorer](https://stellar.expert/explorer/testnet/contract/CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y)
+- **Explorer (Stellar):** [View on Stellar.Expert](https://stellar.expert/explorer/testnet/contract/CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y)
+
+
 ## ✅ Submission Status (Level 6 - Final Upgrade)
 - [x] **Public GitHub Repository:** [Shrikant1a/StellarTrust](https://github.com/Shrikant1a/StellarTrust)
 - [x] **Live Demo:** [stellar-trust.vercel.app](https://stellar-trust.vercel.app/)

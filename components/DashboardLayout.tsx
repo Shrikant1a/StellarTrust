@@ -92,8 +92,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <aside className={`${styles.sidebar} ${isMobileMenuOpen ? styles.sidebarOpen : ''}`}>
         <div className={styles.logoContainer}>
           <Zap className={styles.logoIcon} fill="currentColor" size={24} />
-          <span>StellarTrust</span>
+          <span>Trustlance</span>
         </div>
+
         
         <nav className={styles.navMenu}>
           <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className={`${styles.navItem} ${pathname === '/' ? styles.active : ''}`}>
@@ -186,7 +187,35 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </div>
             <ChevronRight className={styles.chevron} style={{ transform: isUserMenuOpen ? 'rotate(-90deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }} />
           </div>
+
+          {/* Persistent Contract ID UI */}
+          <div style={{
+            margin: '16px',
+            padding: '12px',
+            background: 'rgba(99, 102, 241, 0.05)',
+            border: '1px solid rgba(99, 102, 241, 0.1)',
+            borderRadius: '12px',
+          }}>
+            <p style={{ margin: '0 0 8px 0', fontSize: '10px', color: '#a0a0b2', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>On-Chain Project Contract</p>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+              <code style={{ fontSize: '11px', color: '#818cf8', background: 'rgba(129, 140, 248, 0.1)', padding: '2px 6px', borderRadius: '4px', maxWidth: '140px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {process.env.NEXT_PUBLIC_CONTRACT_ID || 'CBYN...6Y6Y'}
+              </code>
+              <a 
+                href={`https://stellar.expert/explorer/testnet/contract/${process.env.NEXT_PUBLIC_CONTRACT_ID}`} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                title="View on Explorer"
+                style={{ color: '#a0a0b2', transition: 'color 0.2s' }}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#fff'}
+                onMouseLeave={(e) => e.currentTarget.style.color = '#a0a0b2'}
+              >
+                <Search size={14} />
+              </a>
+            </div>
+          </div>
         </div>
+
 
         {/* Settings Modal Overlay */}
         {isSettingsModalOpen && (

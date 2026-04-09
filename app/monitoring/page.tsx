@@ -10,13 +10,18 @@ import {
   RefreshCcw,
   Zap,
   Server,
-  Cloud
+  Cloud,
+  ExternalLink
 } from 'lucide-react';
+
 
 export default function Monitoring() {
   const [logs, setLogs] = useState<string[]>([]);
   const [indexingProgress, setIndexingProgress] = useState(100);
+  const contractId = process.env.NEXT_PUBLIC_CONTRACT_ID || 'Not Configured';
+  const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL || 'https://soroban-testnet.stellar.org';
   const [uptime, setUptime] = useState('99.99%');
+
 
   useEffect(() => {
     const initialLogs = [
@@ -43,8 +48,22 @@ export default function Monitoring() {
       <div className={styles.pageHeader}>
         <div>
           <h1 className={styles.sectionTitle}>System Monitoring</h1>
-          <p className={styles.pageSubtitle}>Real-time health and data indexing status</p>
+          <p className={styles.pageSubtitle}>Real-time health and contract indexing status</p>
+          <div style={{marginTop: '12px', display: 'flex', alignItems: 'center', gap: '8px'}}>
+            <span style={{fontSize: '12px', color: '#a0a0b2', background: 'rgba(255,255,255,0.05)', padding: '4px 8px', borderRadius: '4px', border: '1px solid #2d2d3d'}}>
+              Contract: <strong>{contractId}</strong>
+            </span>
+            <a 
+              href={`https://stellar.expert/explorer/testnet/contract/${contractId}`} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{color: '#6366f1', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px'}}
+            >
+              <ExternalLink size={12} /> Explorer
+            </a>
+          </div>
         </div>
+
         <button className={styles.secondaryButton}>
           <RefreshCcw size={16} style={{marginRight: '8px'}} />
           Refresh Nodes
@@ -118,8 +137,9 @@ export default function Monitoring() {
                         <Server size={16} color="#6366f1" />
                         <span style={{fontSize: '14px', color: '#a0a0b2'}}>Primary RPC</span>
                     </div>
-                    <span style={{fontSize: '14px', fontWeight: 600}}>soroban-mainnet.stellar.org</span>
+                    <span style={{fontSize: '14px', fontWeight: 600}}>{rpcUrl.replace('https://', '')}</span>
                 </div>
+
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                     <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
                         <Zap size={16} color="#facc15" />
