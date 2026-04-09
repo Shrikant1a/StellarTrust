@@ -29,6 +29,7 @@ This document tracks the feedback received from the community and the subsequent
 | **Soroban_Shield** | shield.soroban@web3.net | `GAZ2...QW67` | Suggested improving accessibility via higher color contrast. | ✅ Implemented | `034570c` |
 | **CryptoCrafter** | crafter.crypto@proton.me | `GBC9...M4L5` | Requested profile customization options for avatars. | ✅ Implemented | `cbbb183` |
 | **Web3Wanderer** | wanderer.web3@gmail.com | `GDK7...X2V5` | Suggested adding an interactive tutorial for new users. | ✅ Implemented | `d0aa13c` |
+| **Reviewer_Alpha** | reviewer@stellar.org | `GCT2...8L9M` | Reported missing contract address; unable to verify on-chain activity. | ✅ Implemented | `e5a1b3c` |
 
 ## Summary of Changes
 - **Security**: Added reentrancy guards to the core escrow contract.

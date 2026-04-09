@@ -4,6 +4,15 @@
 
 Trustlance is a decentralized cross-border milestone escrow platform built on the Stellar network. It provides a trustless payment system addressing the limitations of current solutions by offering secure, fast, and low-cost transactions for freelancers and clients using Soroban smart contracts.
 
+---
+
+### ⛓️ Smart Contract Info
+- **Contract ID:** `CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y`
+- **Network:** Stellar Testnet
+- **Explorer:** [**View On-Chain Activity**](https://stellar.expert/explorer/testnet/contract/CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y)
+
+---
+
 ## 🔗 Project Links
 
 - **GitHub Repository:** [Shrikant1a/StellarTrust](https://github.com/Shrikant1a/StellarTrust)

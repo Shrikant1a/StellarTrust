@@ -5,6 +5,9 @@ Trustlance is a decentralized cross-border milestone escrow platform built on th
 ## Smart Contract Design
 
 The core of Trustlance is the `TrustlanceEscrowContract`, deployed on Stellar via Soroban. 
+- **Contract ID:** `CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y`
+- **Network:** Stellar Testnet
+- **Explorer:** [View on Stellar.Expert](https://stellar.expert/explorer/testnet/contract/CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y)
 
 ### Data Structures
 
