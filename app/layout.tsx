@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Roboto_Mono } from "next/font/google";
+import { Inter, Roboto_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 import DashboardLayout from "../components/DashboardLayout";
 import { Analytics } from "@vercel/analytics/react";
@@ -7,6 +7,11 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({
   variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
 });
 
@@ -36,9 +41,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${robotoMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${outfit.variable} ${robotoMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col m-0 overflow-hidden">
+      <body className="min-h-full flex flex-col m-0 overflow-hidden" style={{ fontFamily: 'var(--font-outfit), var(--font-inter), sans-serif' }}>
         <DashboardLayout>
           {children}
         </DashboardLayout>

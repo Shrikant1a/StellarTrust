@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Hexagon, Zap, Shield, Globe, ArrowRight } from 'lucide-react';
+import { Hexagon, Zap, Shield, Globe, ArrowRight, X } from 'lucide-react';
 import styles from './ConnectWallet.module.css';
 import { isConnected, requestAccess } from '@stellar/freighter-api';
 
@@ -23,41 +23,27 @@ export default function ConnectWalletScreen({ onConnect }: ConnectWalletScreenPr
           const access = await requestAccess();
           if (access.address) {
             localStorage.setItem('walletAddress', access.address);
+            localStorage.setItem('walletConnected', 'true');
             localStorage.setItem('walletBrand', 'Freighter');
             onConnect();
           } else {
-            alert('Failed to obtain access to Freighter. Please try again.');
+            alert('Failed to obtain access to Freighter.');
             setSelectedWallet(null);
           }
         } else {
-          alert('Freighter wallet is not installed. Please install the Freighter extension first to connect.');
+          alert('Freighter wallet is not installed.');
           setSelectedWallet(null);
         }
       } catch (error) {
         console.error('Wallet connection error:', error);
-        alert('An error occurred during wallet connection.');
-        setSelectedWallet(null);
-      }
-    } else if (walletName === 'Albedo') {
-      try {
-        const albedo = (await import('@albedo-link/intent')).default;
-        const result = await albedo.publicKey({});
-        if (result.pubkey) {
-          localStorage.setItem('walletAddress', result.pubkey);
-          localStorage.setItem('walletBrand', 'Albedo');
-          onConnect();
-        } else {
-          alert('Failed to authenticate with Albedo.');
-          setSelectedWallet(null);
-        }
-      } catch (error) {
-        console.error('Albedo connection error:', error);
-        alert('An error occurred or connection was cancelled.');
         setSelectedWallet(null);
       }
     } else {
-      // WalletConnect or fallback
+      // Mock for others
       setTimeout(() => {
+        localStorage.setItem('walletAddress', 'G...RDY');
+        localStorage.setItem('walletConnected', 'true');
+        localStorage.setItem('walletBrand', walletName);
         onConnect();
       }, 1500);
     }
@@ -70,26 +56,26 @@ export default function ConnectWalletScreen({ onConnect }: ConnectWalletScreenPr
 
       <div className={styles.card}>
         <div className={styles.iconContainer}>
-          <Hexagon size={40} className={styles.icon} strokeWidth={1.5} />
+          <Hexagon size={48} className={styles.icon} strokeWidth={1} fill="currentColor" />
         </div>
 
-        <h1 className={styles.title}>Welcome to StellarTrust</h1>
+        <h1 className={styles.title}>Trustlance</h1>
         <p className={styles.subtitle}>
-          Connect your wallet to access decentralized escrow, seamless project management, and global freelancing.
+          The institutional-grade milestone escrow protocol powering the future of decentralized work.
         </p>
 
         <div className={styles.features}>
           <div className={styles.featureTag}>
             <Shield size={14} className={styles.featureIcon} />
-            Secure Escrow
+            On-Chain Arbitration
           </div>
           <div className={styles.featureTag}>
             <Zap size={14} className={styles.featureIcon} />
-            Gasless TXs
+            Soroban Powered
           </div>
           <div className={styles.featureTag}>
             <Globe size={14} className={styles.featureIcon} />
-            Cross-border
+            Zero Settlement Risk
           </div>
         </div>
 
@@ -97,91 +83,71 @@ export default function ConnectWalletScreen({ onConnect }: ConnectWalletScreenPr
           className={styles.connectButton}
           onClick={() => setShowWalletModal(true)}
         >
-          Connect Wallet <ArrowRight size={18} />
+          Initialize Protocol <ArrowRight size={18} />
         </button>
 
         <div className={styles.footer}>
-          <span>New to StellarTrust?</span>
-          <a href="#" className={styles.link}>Learn how it works</a>
+          <span>Governed by Stellar.</span>
+          <a href="#" className={styles.link}>Read the Docs</a>
         </div>
       </div>
 
       {showWalletModal && (
         <div style={{
-          position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
-          backgroundColor: 'rgba(11, 11, 20, 0.85)', backdropFilter: 'blur(10px)',
-          display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000
+          position: 'fixed', inset: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.8)', backdropFilter: 'blur(20px)',
+          display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000,
+          animation: 'fadeIn 0.3s ease-out'
         }} onClick={() => setShowWalletModal(false)}>
           <div style={{
-            background: '#1a1a24', border: '1px solid #2d2d3d', borderRadius: '24px',
-            padding: '32px', width: '400px', maxWidth: '90%', display: 'flex', flexDirection: 'column', gap: '16px',
-            boxShadow: '0 24px 64px -12px rgba(0, 0, 0, 0.5)'
+            background: 'var(--surface)', border: '1px solid var(--surface-border)', borderRadius: '32px',
+            padding: '40px', width: '440px', maxWidth: '90%', display: 'flex', flexDirection: 'column', gap: '24px',
+            boxShadow: 'var(--shadow-glass)', animation: 'slideUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)'
           }} onClick={e => e.stopPropagation()}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <h2 style={{ margin: 0, fontSize: '20px', color: '#fff' }}>Connect a Wallet</h2>
-              <button
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <h2 style={{ margin: 0, fontSize: '24px', fontWeight: 800, letterSpacing: '-0.5px' }}>Connect Wallet</h2>
+                <p style={{ margin: '4px 0 0 0', fontSize: '14px', color: 'var(--text-muted)' }}>Securely authenticate with your provider.</p>
+              </div>
+              <button 
                 onClick={() => setShowWalletModal(false)}
-                style={{ background: 'none', border: 'none', color: '#a0a0b2', cursor: 'pointer', fontSize: '24px', lineHeight: 1 }}
+                style={{ background: 'var(--surface-hover)', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: '10px', borderRadius: '12px' }}
               >
-                &times;
+                <X size={20} />
               </button>
             </div>
 
-            <button
-              onClick={() => handleWalletSelect('Freighter')}
-              disabled={selectedWallet !== null}
-              style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px',
-                background: selectedWallet === 'Freighter' ? 'rgba(99, 102, 241, 0.1)' : '#1e1e2d',
-                border: `1px solid ${selectedWallet === 'Freighter' ? '#6366f1' : '#2d2d3d'}`,
-                borderRadius: '12px', color: '#fff', fontSize: '16px', cursor: selectedWallet ? 'not-allowed' : 'pointer',
-                transition: 'all 0.2s', opacity: selectedWallet && selectedWallet !== 'Freighter' ? 0.5 : 1
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: '32px', height: '32px', background: '#000', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}>⚓</div>
-                <span style={{ fontWeight: 500 }}>Freighter</span>
-              </div>
-              {selectedWallet === 'Freighter' ? (
-                <div className={styles.loader} style={{ width: '16px', height: '16px', borderWidth: '2px' }}></div>
-              ) : <span style={{ color: '#6366f1', fontSize: '13px', background: 'rgba(99, 102, 241, 0.1)', padding: '4px 8px', borderRadius: '12px' }}>Popular</span>}
-            </button>
-
-            <button
-              onClick={() => handleWalletSelect('Albedo')}
-              disabled={selectedWallet !== null}
-              style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px',
-                background: selectedWallet === 'Albedo' ? 'rgba(99, 102, 241, 0.1)' : '#1e1e2d',
-                border: `1px solid ${selectedWallet === 'Albedo' ? '#6366f1' : '#2d2d3d'}`,
-                borderRadius: '12px', color: '#fff', fontSize: '16px', cursor: selectedWallet ? 'not-allowed' : 'pointer',
-                transition: 'all 0.2s', opacity: selectedWallet && selectedWallet !== 'Albedo' ? 0.5 : 1
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: '32px', height: '32px', background: '#fff', color: '#000', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}>A</div>
-                <span style={{ fontWeight: 500 }}>Albedo</span>
-              </div>
-              {selectedWallet === 'Albedo' && <div className={styles.loader} style={{ width: '16px', height: '16px', borderWidth: '2px' }}></div>}
-            </button>
-
-            <button
-              onClick={() => handleWalletSelect('WalletConnect')}
-              disabled={selectedWallet !== null}
-              style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px',
-                background: selectedWallet === 'WalletConnect' ? 'rgba(99, 102, 241, 0.1)' : '#1e1e2d',
-                border: `1px solid ${selectedWallet === 'WalletConnect' ? '#6366f1' : '#2d2d3d'}`,
-                borderRadius: '12px', color: '#fff', fontSize: '16px', cursor: selectedWallet ? 'not-allowed' : 'pointer',
-                transition: 'all 0.2s', opacity: selectedWallet && selectedWallet !== 'WalletConnect' ? 0.5 : 1
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: '32px', height: '32px', background: '#3b82f6', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', color: '#fff' }}>W</div>
-                <span style={{ fontWeight: 500 }}>WalletConnect</span>
-              </div>
-              {selectedWallet === 'WalletConnect' && <div className={styles.loader} style={{ width: '16px', height: '16px', borderWidth: '2px' }}></div>}
-            </button>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              {[
+                { name: 'Freighter', icon: '⚓', color: '#000', label: 'Recommended' },
+                { name: 'Albedo', icon: 'A', color: '#fff', label: 'Web-based' },
+                { name: 'Stellar Wallet Kit', icon: 'W', color: 'var(--primary)', label: 'Multi-wallet' }
+              ].map((wallet) => (
+                <button
+                  key={wallet.name}
+                  onClick={() => handleWalletSelect(wallet.name)}
+                  disabled={selectedWallet !== null}
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px',
+                    background: selectedWallet === wallet.name ? 'rgba(99, 102, 241, 0.05)' : 'rgba(255, 255, 255, 0.02)',
+                    border: `1px solid ${selectedWallet === wallet.name ? 'var(--primary)' : 'var(--surface-border)'}`,
+                    borderRadius: '20px', color: 'var(--text-primary)', fontSize: '15px', fontWeight: 600,
+                    cursor: selectedWallet ? 'not-allowed' : 'pointer', transition: 'all 0.2s',
+                    opacity: selectedWallet && selectedWallet !== wallet.name ? 0.3 : 1
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                    <div style={{ width: '40px', height: '40px', background: 'rgba(255,255,255,0.05)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}>
+                      {wallet.icon}
+                    </div>
+                    <span>{wallet.name}</span>
+                  </div>
+                  {selectedWallet === wallet.name ? (
+                    <div className={styles.loader}></div>
+                  ) : <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: 500 }}>{wallet.label}</span>}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       )}

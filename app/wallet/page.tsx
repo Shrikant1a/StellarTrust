@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import styles from '../Dashboard.module.css';
+import styles from '@/app/Dashboard.module.css';
 import { Download, Upload, Filter, RefreshCw, ExternalLink } from 'lucide-react';
 
 export default function WalletPage() {
