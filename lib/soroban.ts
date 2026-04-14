@@ -1,7 +1,7 @@
 import { 
   Contract, 
   rpc, 
-  networks, 
+  Networks, 
   Keypair, 
   TransactionBuilder, 
   Address,
@@ -11,7 +11,7 @@ import {
 
 const CONTRACT_ID = process.env.NEXT_PUBLIC_CONTRACT_ID || '';
 const RPC_URL = process.env.NEXT_PUBLIC_RPC_URL || 'https://soroban-testnet.stellar.org';
-const NETWORK_PASSPHRASE = process.env.NEXT_PUBLIC_NETWORK_PASSPHRASE || networks.TESTNET;
+const NETWORK_PASSPHRASE = process.env.NEXT_PUBLIC_NETWORK_PASSPHRASE || Networks.TESTNET;
 
 export const server = new rpc.Server(RPC_URL);
 
