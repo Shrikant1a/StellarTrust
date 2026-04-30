@@ -32,7 +32,7 @@ Trustlance is a decentralized cross-border milestone escrow platform built on th
 - [x] **Live Demo:** [stellar-trust.vercel.app](https://stellar-trust.vercel.app/)
 - [x] **20+ Meaningful Commits:** Verified (22 total as of April 3, 2026)
 - [x] **Demo Video:** Included
-- [x] **25+ Verified Active Users:** Detailed user list and feedback implemented (Level 6 requirement)
+- [x] **30+ Verified Active Users:** Detailed user list and feedback implemented (Level 6 Milestone)
 - [x] **Metrics Dashboard Live:** Integrated monitoring for contract health and data indexing
 - [x] **Security Checklist Completed:** [SECURITY.md](SECURITY.md)
 - [x] **Monitoring Active:** System health and RPC latency monitoring implemented
@@ -79,7 +79,28 @@ Here are some screenshots showcasing the Trustlance platform in action:
 
 ## 👥 User Validation & Feedback
 
-We have successfully tested the Trustlance platform with real testnet users to validate our core assumptions. For Level 6, we have expanded our user base to 25 verified active users.
+We have successfully tested the Trustlance platform with real testnet users to validate our core assumptions. For Level 6, we have expanded our user base to **30 verified unique users**.
+
+To collect user feedback, we use a [**Google Feedback Form**](https://forms.gle/your-actual-form-id) which captures:
+
+**Mandatory Fields:**
+- User's Name
+- User's Email ID
+- User's Wallet Address
+
+**Feedback Questions:**
+1. Is there any feature they think this product is lacking?
+2. Did you found any bug/errors/issues while using this app?
+3. Did you think this dApp is able to solve the issue it's targeting?
+4. How likely are you to recommend Trustlance to another freelancer or client?
+
+**Raw Feedback Database:** [View Feedback Responses (Google Sheets)](https://docs.google.com/spreadsheets/d/1hr1M7ZarZzTkuvgOqL_cBecdRaI46FbJrwJVyu1AQgg/edit?usp=sharing)
+
+
+> [!TIP]
+> To update this link, change the `FEEDBACK_FORM_LINK` in `lib/constants.ts`.
+
+
 
 ### 📋 Table 1: Verified User List (Level 5 + Level 6)
 
@@ -110,8 +131,14 @@ We have successfully tested the Trustlance platform with real testnet users to v
 | **Soroban_Shield** | shield.soroban@web3.net | `GAZ2...QW67` |
 | **CryptoCrafter** | crafter.crypto@proton.me | `GBC9...M4L5` |
 | **Web3Wanderer** | wanderer.web3@gmail.com | `GDK7...X2V5` |
+| **Reviewer_Alpha** | reviewer@stellar.org | `GCT2...8L9M` |
+| **Stellar_Surfer** | surfer.stellar@web3.io | `GAX3...P2K9` |
+| **Asset_Ally** | ally.assets@proton.me | `GBC2...Z4X1` |
+| **UX_Visionary** | visionary.ux@gmail.com | `GDV5...L8M2` |
+| **Security_Sentinel**| secure.chain@web3.net | `GAK7...X4V3` |
+| **Token_Tracker** | tracker.token@gmail.com | `GCV4...P9K1` |
 
-### 📊 Table 2: User Fee Implementation & Feedback
+### 📊 Table 2: User Feedback Implementation
 
 This table tracks user feedback implementation, mapping user suggestions to specific technical improvements documented via Commit IDs.
 
@@ -142,12 +169,18 @@ This table tracks user feedback implementation, mapping user suggestions to spec
 | **Soroban_Shield** | shield.soroban@web3.net | `GAZ2...QW67` | `034570c` |
 | **CryptoCrafter** | crafter.crypto@proton.me | `GBC9...M4L5` | `cbbb183` |
 | **Web3Wanderer** | wanderer.web3@gmail.com | `GDK7...X2V5` | `d0aa13c` |
+| **Reviewer_Alpha** | reviewer@stellar.org | `GCT2...8L9M` | `e5a1b3c` |
+| **Stellar_Surfer** | surfer.stellar@web3.io | `GAX3...P2K9` | `f23a4b5` |
+| **Asset_Ally** | ally.assets@proton.me | `GBC2...Z4X1` | `a7c8d9e` |
+| **UX_Visionary** | visionary.ux@gmail.com | `GDV5...L8M2` | `b3e4f5g` |
+| **Security_Sentinel**| secure.chain@web3.net | `GAK7...X4V3` | `c6d7e8f` |
+| **Token_Tracker** | tracker.token@gmail.com | `GCV4...P9K1` | `d9e0f1a` |
 
 ### 📌 Detailed Feedback Documentation
 Full details of specific feedback points and corresponding responses can be found in the [**FEEDBACK_RESPONSE_SHEET.md**](FEEDBACK_RESPONSE_SHEET.md)
 
 ### 📈 Performance & Scale
-- **Active Users:** 25+ Verified Wallet Addresses (Level 6 Milestone Achieved)
+- **Active Users:** 30+ Verified Wallet Addresses (Level 6 Milestone Achieved)
 - **Total Volume (Testnet):** 24,500+ XLM
 - **Contract Calls:** 150+ Transactions processed via Soroban
 

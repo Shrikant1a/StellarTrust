@@ -225,3 +225,40 @@
   padding-top: 24px;
   border-top: 1px solid #2d2d3d;
 }
+
+@media (max-width: 768px) {
+  .headerCard {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .financeSection {
+    text-align: left;
+    align-items: flex-start;
+  }
+  
+  .budgetAmount {
+    justify-content: flex-start;
+  }
+  
+  .milestoneItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .mRight {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .actionRow {
+    flex-direction: column;
+  }
+  
+  .actionRow button {
+    width: 100%;
+    justify-content: center;
+  }
+}

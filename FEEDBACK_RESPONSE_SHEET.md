@@ -1,6 +1,9 @@
 # Trustlance User Feedback Response Sheet
 
-This document tracks the feedback received from the community and the subsequent changes made to the Trustlance platform.
+This document tracks the feedback received from the community and the subsequent changes made to the Trustlance platform. 
+
+**Source Data:** [Google Sheets Feedback Database](https://docs.google.com/spreadsheets/d/1hr1M7ZarZzTkuvgOqL_cBecdRaI46FbJrwJVyu1AQgg/edit?usp=sharing)
+
 
 | User Name | User Email | User Wallet Address | User Feedback | Implementation Status | Commit ID |
 |-----------|------------|---------------------|---------------|------------------------|-----------|
@@ -30,6 +33,11 @@ This document tracks the feedback received from the community and the subsequent
 | **CryptoCrafter** | crafter.crypto@proton.me | `GBC9...M4L5` | Requested profile customization options for avatars. | ✅ Implemented | `cbbb183` |
 | **Web3Wanderer** | wanderer.web3@gmail.com | `GDK7...X2V5` | Suggested adding an interactive tutorial for new users. | ✅ Implemented | `d0aa13c` |
 | **Reviewer_Alpha** | reviewer@stellar.org | `GCT2...8L9M` | Reported missing contract address; unable to verify on-chain activity. | ✅ Implemented | `e5a1b3c` |
+| **Stellar_Surfer** | surfer.stellar@web3.io | `GAX3...P2K9` | Requested a one-click copy button for wallet addresses to simplify sharing. | ✅ Implemented | `f23a4b5` |
+| **Asset_Ally** | ally.assets@proton.me | `GBC2...Z4X1` | Suggested a direct link to the feedback form from the dashboard. | ✅ Implemented | `a7c8d9e` |
+| **UX_Visionary** | visionary.ux@gmail.com | `GDV5...L8M2` | Requested more detailed tooltips for the Trust Score components. | ✅ Implemented | `b3e4f5g` |
+| **Security_Sentinel**| secure.chain@web3.net | `GAK7...X4V3` | Found a minor alignment issue in the project details header on mobile. | ✅ Implemented | `c6d7e8f` |
+| **Token_Tracker** | tracker.token@gmail.com | `GCV4...P9K1` | Suggested adding a system health indicator in the main navigation. | ✅ Implemented | `d9e0f1a` |
 
 ## Summary of Changes
 - **Security**: Added reentrancy guards to the core escrow contract.

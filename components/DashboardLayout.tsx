@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import ConnectWalletScreen from './ConnectWalletScreen';
 import styles from '@/app/Dashboard.module.css';
+import { FEEDBACK_FORM_LINK } from '@/lib/constants';
 import { 
   LayoutDashboard, 
   FolderIcon, 
@@ -186,7 +187,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <button className={styles.iconButton}>
               <Compass size={20} />
             </button>
-            <button className={styles.connectButton} onClick={handleDisconnect}>
+            <a href={FEEDBACK_FORM_LINK} target="_blank" rel="noopener noreferrer" className={styles.secondaryButton} style={{ textDecoration: 'none' }}>
+              Feedback
+            </a>
+            <button className={styles.connectButton} onClick={() => {
+              navigator.clipboard.writeText(fullWalletAddress);
+              alert('Wallet address copied to clipboard!');
+            }}>
                <Hexagon size={18} />
                {walletAddress}
             </button>

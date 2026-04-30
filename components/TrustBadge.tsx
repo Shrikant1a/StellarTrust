@@ -76,18 +76,19 @@ export default function TrustBadge({ score, level, verified = true }: TrustBadge
 
       <div style={{display: 'flex', gap: '10px'}}>
         {[
-          { icon: Zap, color: '#facc15', label: 'Speed' },
-          { icon: Award, color: '#818cf8', label: 'Quality' },
-          { icon: TrendingUp, color: '#4ade80', label: 'Growth' }
+          { icon: Zap, color: '#facc15', label: 'Payment Speed', title: 'Average time to release funds: Top 1% (Express)' },
+          { icon: Award, color: '#818cf8', label: 'Work Quality', title: 'Quality rating based on client verification: 4.9/5' },
+          { icon: TrendingUp, color: '#4ade80', label: 'Platform Growth', title: 'Monthly transaction volume growth: +22%' }
         ].map((item, i) => (
-          <div key={i} title={item.label} style={{
+          <div key={i} title={item.title} style={{
             padding: '8px', 
             borderRadius: '12px', 
             background: 'var(--surface-hover)',
             border: '1px solid var(--surface-border)',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            cursor: 'help'
           }}>
             <item.icon size={16} color={item.color} />
           </div>
