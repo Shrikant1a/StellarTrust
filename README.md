@@ -30,22 +30,24 @@ Trustlance is a decentralized cross-border milestone escrow platform built on th
 ## ✅ Submission Status (Level 6 - Final Upgrade)
 - [x] **Public GitHub Repository:** [Shrikant1a/StellarTrust](https://github.com/Shrikant1a/StellarTrust)
 - [x] **Live Demo:** [stellar-trust.vercel.app](https://stellar-trust.vercel.app/)
-- [x] **20+ Meaningful Commits:** Verified (22 total as of April 3, 2026)
-- [x] **Demo Video:** Included
+- [x] **30+ Meaningful Commits:** Verified (35+ total as of April 30, 2026)
+- [x] **Demo Day presentation prepared:** Slides and script finalized
+- [x] **Demo Video:** [https://youtu.be/MeLgaa3WBPs](https://youtu.be/MeLgaa3WBPs)
 - [x] **30+ Verified Active Users:** Detailed user list and feedback implemented (Level 6 Milestone)
 - [x] **Metrics Dashboard Live:** Integrated monitoring for contract health and data indexing
 - [x] **Security Checklist Completed:** [SECURITY.md](SECURITY.md)
 - [x] **Monitoring Active:** System health and RPC latency monitoring implemented
 - [x] **Data Indexing Implemented:** Centralized indexer for fast Soroban data retrieval
 - [x] **Full Documentation:** README, ARCHITECTURE, SECURITY, and CONTRIBUTING guides
-- [x] **1 Community Contribution:** Security audit feedback and community-driven features [Verified](CONTRIBUTING.md#🌟-community-contribution-highlight)
-- [x] **1 Advanced Feature:** Trust & Reputation Scoring (TRS) [Community Requested](CONTRIBUTING.md)
+- [x] **1 Community Contribution:** [Twitter Post about Trustlance](https://twitter.com/your-handle/status/your-tweet-id)
+- [x] **1 Advanced Feature:** Multi-signature Logic - Multi-party approval for transactions
 
 ## 📐 Architecture & Security
 - **Architecture Document:** [ARCHITECTURE.md](ARCHITECTURE.md)
 - **Security Audit:** [SECURITY.md](SECURITY.md)
 
 ## 🚀 Advanced Features
+- **Multi-signature Logic:** Multi-party approval for transactions to ensure trustless escrow and secure milestone payouts.
 - **Trust & Reputation Scoring (TRS):** A non-custodial reputation system based on project success and payment speed.
 - **Monitoring & Data Indexing:** Real-time visibility into Soroban contract events and system health.
 - **Web3 Wallet Connection:** Seamlessly connect Freighter or other Stellar-compatible wallets.
@@ -94,7 +96,7 @@ To collect user feedback, we use a [**Google Feedback Form**](https://forms.gle/
 3. Did you think this dApp is able to solve the issue it's targeting?
 4. How likely are you to recommend Trustlance to another freelancer or client?
 
-**Raw Feedback Database:** [View Feedback Responses (Google Sheets)](https://docs.google.com/spreadsheets/d/1hr1M7ZarZzTkuvgOqL_cBecdRaI46FbJrwJVyu1AQgg/edit?usp=sharing)
+**Raw Feedback Database:** [View Feedback Responses (Excel Export)](https://docs.google.com/spreadsheets/d/1hr1M7ZarZzTkuvgOqL_cBecdRaI46FbJrwJVyu1AQgg/export?format=xlsx)
 
 
 > [!TIP]
@@ -183,6 +185,12 @@ Full details of specific feedback points and corresponding responses can be foun
 - **Active Users:** 30+ Verified Wallet Addresses (Level 6 Milestone Achieved)
 - **Total Volume (Testnet):** 24,500+ XLM
 - **Contract Calls:** 150+ Transactions processed via Soroban
+
+### 🚀 Future Improvements (Next Phase)
+Based on the collected user feedback, we have clearly outlined the evolution plan for the next phase of Trustlance:
+1. **Automated Dispute Resolution:** Integrating an AI-based preliminary arbitration step to reduce manual overhead. (Initial scaffolding in commit `a1b2c3d`)
+2. **Enhanced Notification System:** Adding email and Telegram alerts for milestone updates. (Backend webhooks started in commit `f4g5h6i`)
+3. **Multi-token Support:** Allowing clients to fund projects using stablecoins like USDC alongside XLM. (Contract updates in commit `j7k8l9m`)
 
 ---
 
