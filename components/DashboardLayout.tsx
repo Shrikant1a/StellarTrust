@@ -20,7 +20,10 @@ import {
   Zap,
   Camera,
   Menu,
-  Users
+  Users,
+  Copy,
+  ExternalLink,
+  ShieldCheck
 } from 'lucide-react';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -138,16 +141,33 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <div style={{
             marginTop: '16px',
             padding: '16px',
-            background: 'rgba(99, 102, 241, 0.03)',
-            border: '1px solid rgba(255, 255, 255, 0.05)',
+            background: 'rgba(129, 140, 248, 0.03)',
+            border: '1px solid rgba(129, 140, 248, 0.15)',
             borderRadius: '16px',
+            boxShadow: 'inset 0 0 12px rgba(129, 140, 248, 0.02)'
           }}>
-            <p style={{ margin: '0 0 8px 0', fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700 }}>Contract ID</p>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
-              <code style={{ fontSize: '11px', color: 'var(--primary)', opacity: 0.8, overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                {process.env.NEXT_PUBLIC_CONTRACT_ID || 'CBYN...6Y6Y'}
+            <p style={{ margin: '0 0 8px 0', fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--accent-success)', boxShadow: '0 0 6px var(--accent-success)' }}></span>
+              Soroban Escrow
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <code style={{ fontSize: '11px', color: 'var(--primary)', opacity: 0.8, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', width: '100%', fontFamily: 'monospace' }}>
+                CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y
               </code>
-              <Search size={14} style={{ color: 'var(--text-muted)', cursor: 'pointer' }} />
+              <a 
+                href="https://stellar.expert/explorer/testnet/contract/CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ 
+                  fontSize: '11px', color: '#ffffff', textDecoration: 'none', fontWeight: 600,
+                  display: 'flex', alignItems: 'center', gap: '4px', marginTop: '4px',
+                  opacity: 0.8
+                }}
+                onMouseEnter={e => e.currentTarget.style.opacity = '1'}
+                onMouseLeave={e => e.currentTarget.style.opacity = '0.8'}
+              >
+                View Explorer ↗
+              </a>
             </div>
           </div>
         </div>
@@ -168,6 +188,69 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
       {/* Main Content */}
       <main className={styles.mainContent}>
+        {/* Global On-Chain Sticky Alert Banner */}
+        <div style={{
+          background: 'linear-gradient(90deg, rgba(129, 140, 248, 0.12), rgba(192, 132, 252, 0.03))',
+          border: '1px solid rgba(129, 140, 248, 0.22)',
+          borderRadius: '16px',
+          padding: '12px 20px',
+          marginBottom: '24px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          backdropFilter: 'blur(10px)',
+          animation: 'slideUp 0.4s ease-out'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span style={{ 
+              display: 'inline-flex', padding: '4px 8px', borderRadius: '8px', 
+              background: 'rgba(52, 211, 153, 0.15)', color: 'var(--accent-success)', 
+              fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px' 
+            }}>
+              Testnet Active
+            </span>
+            <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
+              Stellar Escrow Contract: <strong style={{ color: '#ffffff', fontFamily: 'monospace' }}>CBYNQF3RPZ...524SF6Y6Y</strong>
+            </span>
+          </div>
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <button 
+              onClick={() => {
+                navigator.clipboard.writeText('CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y');
+                alert('Contract address copied!');
+              }}
+              style={{
+                background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)',
+                color: '#ffffff', padding: '6px 12px', borderRadius: '10px', fontSize: '11px',
+                fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px',
+                transition: 'all 0.2s'
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
+              onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
+            >
+              <Copy size={12} />
+              Copy
+            </button>
+            <a 
+              href="https://stellar.expert/explorer/testnet/contract/CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                background: 'linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%)',
+                color: '#ffffff', padding: '6px 14px', borderRadius: '10px', fontSize: '11px',
+                fontWeight: 700, cursor: 'pointer', textDecoration: 'none', display: 'flex',
+                alignItems: 'center', gap: '6px', boxShadow: '0 4px 10px rgba(99, 102, 241, 0.2)',
+                transition: 'all 0.2s'
+              }}
+              onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-1px)'}
+              onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
+            >
+              <ExternalLink size={12} />
+              Explorer
+            </a>
+          </div>
+        </div>
+
         {/* Header */}
         <header className={styles.header}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flex: 1 }}>

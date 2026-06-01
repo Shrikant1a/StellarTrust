@@ -30,7 +30,7 @@ This document outlines the security measures and considerations for the Trustlan
 
 - [x] **Event Logging**: Soroban events are emitted for all major state changes.
 - [x] **Error Handling**: Graceful error handling in the UI for failed transactions.
-- [ ] **Real-time Monitoring**: (Planned) Integration with a blockchain indexing service for real-time alerts.
+- [x] **Real-time Monitoring**: Integrated real-time Horizon ledger events and indexer logs inside the operational `/monitoring` dashboard.
 
 ## ✅ Completed Security Audit (April 3, 2026)
 - Reviewed `TrustlanceEscrowContract` for logic flaws.
