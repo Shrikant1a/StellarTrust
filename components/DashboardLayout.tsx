@@ -6,6 +6,7 @@ import Link from 'next/link';
 import ConnectWalletScreen from './ConnectWalletScreen';
 import styles from '@/app/Dashboard.module.css';
 import { FEEDBACK_FORM_LINK } from '@/lib/constants';
+import { useNetwork } from '@/lib/NetworkContext';
 import { 
   LayoutDashboard, 
   FolderIcon, 
@@ -27,6 +28,7 @@ import {
 } from 'lucide-react';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const { network, setNetwork, contractId, explorerUrl } = useNetwork();
   const pathname = usePathname();
   const [isWalletConnected, setIsWalletConnected] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -147,15 +149,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             boxShadow: 'inset 0 0 12px rgba(129, 140, 248, 0.02)'
           }}>
             <p style={{ margin: '0 0 8px 0', fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--accent-success)', boxShadow: '0 0 6px var(--accent-success)' }}></span>
-              Soroban Escrow
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: network === 'mainnet' ? 'var(--accent-blue)' : 'var(--accent-success)', boxShadow: network === 'mainnet' ? '0 0 6px var(--accent-blue)' : '0 0 6px var(--accent-success)' }}></span>
+              Soroban Escrow ({network === 'mainnet' ? 'Mainnet' : 'Testnet'})
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <code style={{ fontSize: '11px', color: 'var(--primary)', opacity: 0.8, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', width: '100%', fontFamily: 'monospace' }}>
-                CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y
+                {contractId}
               </code>
               <a 
-                href="https://stellar.expert/explorer/testnet/contract/CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y" 
+                href={explorerUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 style={{ 
@@ -204,19 +206,36 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <span style={{ 
               display: 'inline-flex', padding: '4px 8px', borderRadius: '8px', 
-              background: 'rgba(52, 211, 153, 0.15)', color: 'var(--accent-success)', 
+              background: network === 'mainnet' ? 'rgba(59, 130, 246, 0.15)' : 'rgba(52, 211, 153, 0.15)', 
+              color: network === 'mainnet' ? 'var(--accent-blue)' : 'var(--accent-success)', 
               fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px' 
             }}>
-              Testnet Active
+              {network === 'mainnet' ? 'Mainnet Live' : 'Testnet Active'}
             </span>
             <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
-              Stellar Escrow Contract: <strong style={{ color: '#ffffff', fontFamily: 'monospace' }}>CBYNQF3RPZ...524SF6Y6Y</strong>
+              Stellar Escrow Contract: <strong style={{ color: '#ffffff', fontFamily: 'monospace' }}>
+                {contractId.substring(0, 10)}...{contractId.substring(contractId.length - 9)}
+              </strong>
             </span>
           </div>
-          <div style={{ display: 'flex', gap: '10px' }}>
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+            <button 
+              onClick={() => setNetwork(network === 'testnet' ? 'mainnet' : 'testnet')}
+              style={{
+                background: 'rgba(129, 140, 248, 0.15)',
+                border: '1px solid rgba(129, 140, 248, 0.3)',
+                color: '#ffffff', padding: '6px 12px', borderRadius: '10px', fontSize: '11px',
+                fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px',
+                transition: 'all 0.2s'
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = 'rgba(129, 140, 248, 0.25)'}
+              onMouseLeave={e => e.currentTarget.style.background = 'rgba(129, 140, 248, 0.15)'}
+            >
+              Switch to {network === 'testnet' ? 'Mainnet' : 'Testnet'}
+            </button>
             <button 
               onClick={() => {
-                navigator.clipboard.writeText('CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y');
+                navigator.clipboard.writeText(contractId);
                 alert('Contract address copied!');
               }}
               style={{
@@ -232,7 +251,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               Copy
             </button>
             <a 
-              href="https://stellar.expert/explorer/testnet/contract/CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y"
+              href={explorerUrl}
               target="_blank"
               rel="noopener noreferrer"
               style={{

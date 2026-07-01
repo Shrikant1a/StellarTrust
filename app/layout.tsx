@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Roboto_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 import DashboardLayout from "../components/DashboardLayout";
+import { NetworkProvider } from "../lib/NetworkContext";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -44,9 +45,11 @@ export default function RootLayout({
       className={`${inter.variable} ${outfit.variable} ${robotoMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col m-0 overflow-hidden" style={{ fontFamily: 'var(--font-outfit), var(--font-inter), sans-serif' }}>
-        <DashboardLayout>
-          {children}
-        </DashboardLayout>
+        <NetworkProvider>
+          <DashboardLayout>
+            {children}
+          </DashboardLayout>
+        </NetworkProvider>
         <Analytics />
         <SpeedInsights />
       </body>

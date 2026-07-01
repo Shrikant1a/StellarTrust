@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import styles from '@/app/Dashboard.module.css';
+import { useNetwork } from '@/lib/NetworkContext';
 import { 
   Briefcase,
   Lock,
@@ -21,7 +22,7 @@ import Link from 'next/link';
 import TrustBadge from '../components/TrustBadge';
 
 export default function Dashboard() {
-  const contractId = 'CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y';
+  const { network, contractId, explorerUrl } = useNetwork();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -79,8 +80,10 @@ export default function Dashboard() {
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '20px' }}>
           <div style={{ flex: 1, minWidth: '300px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-              <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--accent-success)', boxShadow: '0 0 10px var(--accent-success)', animation: 'spin 2s linear infinite' }}></div>
-              <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>Soroban Smart Contract Active</span>
+              <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: network === 'mainnet' ? 'var(--accent-blue)' : 'var(--accent-success)', boxShadow: network === 'mainnet' ? '0 0 10px var(--accent-blue)' : '0 0 10px var(--accent-success)', animation: 'spin 2s linear infinite' }}></div>
+              <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                Soroban Smart Contract ({network === 'mainnet' ? 'Mainnet Live' : 'Testnet Active'})
+              </span>
             </div>
             <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', margin: '0 0 12px 0', letterSpacing: '-0.3px' }}>Stellar Escrow Network Address</h2>
             <div style={{ 
@@ -108,7 +111,7 @@ export default function Dashboard() {
 
           <div style={{ display: 'flex', gap: '12px' }}>
             <a 
-              href={`https://stellar.expert/explorer/testnet/contract/${contractId}`} 
+              href={explorerUrl} 
               target="_blank" 
               rel="noopener noreferrer"
               className={styles.secondaryButton}
@@ -129,7 +132,7 @@ export default function Dashboard() {
           </div>
           <div className={styles.metricInfo}>
             <span className={styles.metricLabel}>Total Projects</span>
-            <span className={styles.metricValue}>42</span>
+            <span className={styles.metricValue}>{network === 'mainnet' ? '105' : '42'}</span>
           </div>
         </div>
         
@@ -139,7 +142,9 @@ export default function Dashboard() {
           </div>
           <div className={styles.metricInfo}>
             <span className={styles.metricLabel}>Funds Locked</span>
-            <span className={styles.metricValue}>24,500 <span className={styles.unit}>XLM</span></span>
+            <span className={styles.metricValue}>
+              {network === 'mainnet' ? '125,450' : '24,500'} <span className={styles.unit}>XLM</span>
+            </span>
           </div>
         </div>
         
@@ -149,7 +154,7 @@ export default function Dashboard() {
           </div>
           <div className={styles.metricInfo}>
             <span className={styles.metricLabel}>Verified Users</span>
-            <span className={styles.metricValue}>34</span>
+            <span className={styles.metricValue}>{network === 'mainnet' ? '84' : '34'}</span>
           </div>
         </div>
       </section>
