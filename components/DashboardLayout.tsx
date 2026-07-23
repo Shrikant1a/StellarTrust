@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import ConnectWalletScreen from './ConnectWalletScreen';
@@ -38,15 +38,23 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [isExploreOpen, setIsExploreOpen] = useState(false);
   const [hasUnreadNotifications, setHasUnreadNotifications] = useState(true);
   const [profilePicture, setProfilePicture] = useState('https://i.pravatar.cc/150?img=11');
+  const [tempPhoto, setTempPhoto] = useState('https://i.pravatar.cc/150?img=11');
   const [userName, setUserName] = useState('James Carter');
   const [tempUserName, setTempUserName] = useState('James Carter');
   const [walletAddress, setWalletAddress] = useState('0x1234...5678');
   const [fullWalletAddress, setFullWalletAddress] = useState('0x1234567890abcdef1234567890abcdef12345678');
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleProfilePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
-      setProfilePicture(URL.createObjectURL(file));
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (typeof reader.result === 'string') {
+          setTempPhoto(reader.result);
+        }
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -60,6 +68,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         setFullWalletAddress(address);
         setWalletAddress(`${address.substring(0, 6)}...${address.substring(address.length - 4)}`);
       }
+    }
+    const savedName = localStorage.getItem('trustlance_userName');
+    if (savedName) {
+      setUserName(savedName);
+      setTempUserName(savedName);
+    }
+    const savedPhoto = localStorage.getItem('trustlance_profilePicture');
+    if (savedPhoto) {
+      setProfilePicture(savedPhoto);
+      setTempPhoto(savedPhoto);
     }
   }, []);
 
@@ -182,7 +200,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
              borderRadius: '16px', padding: '12px', boxShadow: 'var(--shadow-lg)', zIndex: 100,
              backdropFilter: 'blur(20px)', animation: 'slideUp 0.3s ease-out'
            }}>
-             <button className={styles.navItem} style={{ width: '100%', marginBottom: '4px' }} onClick={() => { setIsSettingsModalOpen(true); setIsUserMenuOpen(false); }}>Profile Settings</button>
+             <button className={styles.navItem} style={{ width: '100%', marginBottom: '4px' }} onClick={() => {
+               setTempUserName(userName);
+               setTempPhoto(profilePicture);
+               setIsSettingsModalOpen(true);
+               setIsUserMenuOpen(false);
+             }}>Profile Settings</button>
              <button className={styles.navItem} style={{ width: '100%', color: 'var(--accent-danger)' }} onClick={handleDisconnect}>Disconnect</button>
            </div>
         )}
@@ -324,13 +347,46 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                <img src={profilePicture} style={{ width: '80px', height: '80px', borderRadius: '24px' }} />
-                <button className={styles.detailsButton}>Change Photo</button>
+                <img src={tempPhoto} style={{ width: '80px', height: '80px', borderRadius: '24px', objectFit: 'cover' }} />
+                <input 
+                  type="file" 
+                  ref={fileInputRef} 
+                  style={{ display: 'none' }} 
+                  onChange={handleProfilePictureChange} 
+                  accept="image/*" 
+                />
+                <button 
+                  className={styles.detailsButton}
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  Change Photo
+                </button>
               </div>
-              <input className={styles.searchInput} style={{ width: '100%' }} defaultValue={userName} />
+              <input 
+                className={styles.searchInput} 
+                style={{ width: '100%' }} 
+                value={tempUserName} 
+                onChange={e => setTempUserName(e.target.value)} 
+              />
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '20px' }}>
                 <button className={styles.detailsButton} onClick={() => setIsSettingsModalOpen(false)}>Close</button>
-                <button className={styles.connectButton}>Save Changes</button>
+                <button 
+                  className={styles.connectButton}
+                  onClick={() => {
+                    setUserName(tempUserName);
+                    setProfilePicture(tempPhoto);
+                    try {
+                      localStorage.setItem('trustlance_userName', tempUserName);
+                      localStorage.setItem('trustlance_profilePicture', tempPhoto);
+                    } catch (error) {
+                      console.error('Failed to save to localStorage:', error);
+                      alert('Could not save profile details (image file might be too large).');
+                    }
+                    setIsSettingsModalOpen(false);
+                  }}
+                >
+                  Save Changes
+                </button>
               </div>
             </div>
           </div>
