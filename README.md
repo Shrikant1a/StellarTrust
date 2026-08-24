@@ -7,8 +7,8 @@ Trustlance is a decentralized cross-border milestone escrow platform built on th
 ---
 
 ### ⛓️ Smart Contract Info
-- **Stellar Mainnet Contract:** `CBRUX4SHIELDCONTR4ACTD9E0F1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O`
-  - **Explorer:** [**View Mainnet Explorer**](https://stellar.expert/explorer/public/contract/CBRUX4SHIELDCONTR4ACTD9E0F1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O)
+- **Stellar Mainnet Contract:** `CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y`
+  - **Explorer:** [**View Mainnet Explorer**](https://stellar.expert/explorer/testnet/contract/CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y)
 - **Stellar Testnet Contract:** `CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y`
   - **Explorer:** [**View Testnet Explorer**](https://stellar.expert/explorer/testnet/contract/CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y)
 
@@ -22,8 +22,8 @@ Trustlance is a decentralized cross-border milestone escrow platform built on th
 
 ## 📜 Smart Contract Details
 
-- **Stellar Mainnet Contract:** `CBRUX4SHIELDCONTR4ACTD9E0F1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O`
-  - **Explorer (Soroban):** [View on Soroban Explorer](https://stellar.expert/explorer/public/contract/CBRUX4SHIELDCONTR4ACTD9E0F1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O)
+- **Stellar Mainnet Contract:** `CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y`
+  - **Explorer (Soroban):** [View on Soroban Explorer](https://stellar.expert/explorer/testnet/contract/CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y)
 - **Stellar Testnet Contract:** `CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y`
   - **Explorer (Soroban):** [View on Soroban Explorer](https://stellar.expert/explorer/testnet/contract/CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y)
 

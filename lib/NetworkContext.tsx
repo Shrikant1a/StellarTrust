@@ -30,7 +30,7 @@ export function NetworkProvider({ children }: { children: React.ReactNode }) {
   };
 
   const contractId = network === 'mainnet'
-    ? 'CBRUX4SHIELDCONTR4ACTD9E0F1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O'
+    ? 'CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y'
     : 'CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y';
 
   const rpcUrl = network === 'mainnet'
@@ -38,7 +38,7 @@ export function NetworkProvider({ children }: { children: React.ReactNode }) {
     : 'https://soroban-testnet.stellar.org';
 
   const explorerUrl = network === 'mainnet'
-    ? 'https://stellar.expert/explorer/public/contract/CBRUX4SHIELDCONTR4ACTD9E0F1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O'
+    ? 'https://stellar.expert/explorer/testnet/contract/CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y'
     : 'https://stellar.expert/explorer/testnet/contract/CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y';
 
   return (
