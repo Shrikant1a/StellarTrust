@@ -8,7 +8,8 @@ import {
   CircleDashed,
   ArrowRight,
   ShieldAlert,
-  Wallet
+  Wallet,
+  X
 } from 'lucide-react';
 import globalStyles from '../../Dashboard.module.css';
 
@@ -32,6 +33,23 @@ export default function ProjectDetailsPage({ params }: PageProps) {
   const [milestone3Status, setMilestone3Status] = useState<'pending' | 'active' | 'processing' | 'completed'>('active');
   const [milestone4Status, setMilestone4Status] = useState<'pending' | 'active' | 'completed'>('pending');
   const [projectStatus, setProjectStatus] = useState<'Active' | 'Disputed' | 'Completed'>('Active');
+  
+  const [txModalOpen, setTxModalOpen] = useState(false);
+  const [txDetails, setTxDetails] = useState<any>(null);
+
+  const handleOpenTxDetails = (milestoneTitle: string, amount: string) => {
+    setTxDetails({
+      hash: 'eb3a1f827d9c...8f1a', // Mock mainnet hash
+      amount: amount,
+      currency: projectData.currency,
+      timestamp: new Date().toLocaleString(),
+      to: projectData.freelancer,
+      milestone: milestoneTitle,
+      fee: '0.00001 XLM',
+      network: 'Stellar Mainnet'
+    });
+    setTxModalOpen(true);
+  };
 
   useEffect(() => {
     const saved = localStorage.getItem('trustlance_projects');
@@ -182,7 +200,7 @@ export default function ProjectDetailsPage({ params }: PageProps) {
                 <span className={styles.mAmount}>{(Number(projectData.budget) * 0.2).toFixed(1)} {projectData.currency}</span>
                 {milestone1Status === 'completed' ? (
                   <>
-                    <span className={styles.badgeActive} style={{ border: '1px solid #4ade80', background: 'none' }}>Paid</span>
+                    <span onClick={() => handleOpenTxDetails('1. Wireframes & Design System', (Number(projectData.budget) * 0.2).toFixed(1))} className={`${styles.badgeActive} ${styles.clickableBadge}`} style={{ border: '1px solid #4ade80', background: 'none' }}>Paid</span>
                     <CheckCircle color="#4ade80" size={24} />
                   </>
                 ) : milestone1Status === 'active' ? (
@@ -201,7 +219,7 @@ export default function ProjectDetailsPage({ params }: PageProps) {
                 <span className={styles.mAmount}>{(Number(projectData.budget) * 0.3).toFixed(1)} {projectData.currency}</span>
                 {milestone2Status === 'completed' ? (
                   <>
-                    <span className={styles.badgeActive} style={{ border: '1px solid #4ade80', background: 'none' }}>Paid</span>
+                    <span onClick={() => handleOpenTxDetails('2. Frontend Development', (Number(projectData.budget) * 0.3).toFixed(1))} className={`${styles.badgeActive} ${styles.clickableBadge}`} style={{ border: '1px solid #4ade80', background: 'none' }}>Paid</span>
                     <CheckCircle color="#4ade80" size={24} />
                   </>
                 ) : milestone2Status === 'active' ? (
@@ -220,7 +238,7 @@ export default function ProjectDetailsPage({ params }: PageProps) {
                 <span className={styles.mAmount}>{(Number(projectData.budget) * 0.3).toFixed(1)} {projectData.currency}</span>
                 {milestone3Status === 'completed' ? (
                   <>
-                    <span className={styles.badgeActive} style={{ border: '1px solid #4ade80', background: 'none' }}>Paid</span>
+                    <span onClick={() => handleOpenTxDetails('3. Smart Contract Integration', (Number(projectData.budget) * 0.3).toFixed(1))} className={`${styles.badgeActive} ${styles.clickableBadge}`} style={{ border: '1px solid #4ade80', background: 'none' }}>Paid</span>
                     <CheckCircle color="#4ade80" size={24} />
                   </>
                 ) : milestone3Status === 'active' ? (
@@ -239,7 +257,7 @@ export default function ProjectDetailsPage({ params }: PageProps) {
                 <span className={styles.mAmount}>{(Number(projectData.budget) * 0.2).toFixed(1)} {projectData.currency}</span>
                 {milestone4Status === 'completed' ? (
                   <>
-                    <span className={styles.badgeActive} style={{ border: '1px solid #4ade80', background: 'none' }}>Paid</span>
+                    <span onClick={() => handleOpenTxDetails('4. Final QA & Launch', (Number(projectData.budget) * 0.2).toFixed(1))} className={`${styles.badgeActive} ${styles.clickableBadge}`} style={{ border: '1px solid #4ade80', background: 'none' }}>Paid</span>
                     <CheckCircle color="#4ade80" size={24} />
                   </>
                 ) : milestone4Status === 'active' ? (
@@ -263,6 +281,54 @@ export default function ProjectDetailsPage({ params }: PageProps) {
           </div>
         </div>
       </div>
+
+      {txModalOpen && txDetails && (
+        <div className={styles.modalOverlay} onClick={() => setTxModalOpen(false)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <h3 className={styles.modalTitle}>Transaction Details</h3>
+              <button className={styles.closeButton} onClick={() => setTxModalOpen(false)}>
+                <X size={20} />
+              </button>
+            </div>
+            
+            <div className={styles.txDetailRow}>
+              <span className={styles.txDetailLabel}>Milestone</span>
+              <span className={styles.txDetailValue}>{txDetails.milestone}</span>
+            </div>
+            <div className={styles.txDetailRow}>
+              <span className={styles.txDetailLabel}>Transaction Hash</span>
+              <span className={styles.txDetailValue}>{txDetails.hash}</span>
+            </div>
+            <div className={styles.txDetailRow}>
+              <span className={styles.txDetailLabel}>Network</span>
+              <span className={styles.txDetailValue}>{txDetails.network}</span>
+            </div>
+            <div className={styles.txDetailRow}>
+              <span className={styles.txDetailLabel}>Amount Released</span>
+              <span className={styles.txDetailValueSuccess}>
+                {txDetails.amount} {txDetails.currency}
+              </span>
+            </div>
+            <div className={styles.txDetailRow}>
+              <span className={styles.txDetailLabel}>Network Fee</span>
+              <span className={styles.txDetailValue}>{txDetails.fee}</span>
+            </div>
+            <div className={styles.txDetailRow}>
+              <span className={styles.txDetailLabel}>Timestamp</span>
+              <span className={styles.txDetailValue}>{txDetails.timestamp}</span>
+            </div>
+            <div className={styles.txDetailRow}>
+              <span className={styles.txDetailLabel}>Recipient</span>
+              <span className={styles.txDetailValue}>{txDetails.to}</span>
+            </div>
+
+            <a href="https://stellar.expert/explorer/public" target="_blank" rel="noopener noreferrer" className={styles.explorerLink}>
+              View on Stellar Expert
+            </a>
+          </div>
+        </div>
+      )}
     </>
   );
 }

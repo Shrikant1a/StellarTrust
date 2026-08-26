@@ -76,6 +76,8 @@ Here are some screenshots showcasing the Trustlance platform in action:
 | ![Performance](./public/images/Screenshot%202026-03-31%20161118.png) | ![Security](./public/images/Screenshot%202026-03-31%20161149.png) |
 | **Community Feed** | **Final Submission View** |
 | ![Community](./public/images/Screenshot%202026-03-31%20161201.png) | ![Final](./public/images/Screenshot%202026-03-31%20161544.png) |
+| **Mainnet Transaction Proof** | **Growth & Users** |
+| ![Mainnet Proof](./public/images/mainnet-trx-proof.png) | ![Growth Report](./public/images/growth-report.png) |
 
 ---
 
