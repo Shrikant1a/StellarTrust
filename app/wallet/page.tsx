@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from '@/app/Dashboard.module.css';
-import { Download, Upload, Filter, RefreshCw, ExternalLink } from 'lucide-react';
+import { Download, Upload, Filter, RefreshCw, ExternalLink, Search } from 'lucide-react';
 
 export default function WalletPage() {
   const [activeTab, setActiveTab] = useState('XLM');
@@ -10,6 +10,7 @@ export default function WalletPage() {
   const [balance, setBalance] = useState<string>('0.00');
   const [usdcBalance, setUsdcBalance] = useState<string>('0.00');
   const [transactions, setTransactions] = useState<any[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -150,6 +151,20 @@ export default function WalletPage() {
         </div>
       </div>
 
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', gap: '16px' }}>
+        <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#f3f4f6' }}>Transaction History</h3>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.05)', padding: '6px 12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', width: '300px' }}>
+          <Search size={14} style={{ color: '#9ca3af' }} />
+          <input 
+            type="text" 
+            placeholder="Search by type, asset, or project..." 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{ background: 'transparent', border: 'none', color: '#fff', fontSize: '13px', outline: 'none', width: '100%' }}
+          />
+        </div>
+      </div>
+
       <div className={styles.tableContainer} style={{ background: 'transparent', border: 'none', padding: '0 8px' }}>
         <div className={styles.tableHeader} style={{ gridTemplateColumns: '1.5fr 1fr 1fr', paddingBottom: '16px' }}>
           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -165,8 +180,22 @@ export default function WalletPage() {
 
         {loading ? (
            <div style={{ padding: '24px', textAlign: 'center', color: '#a0a0b2' }}>Loading transactions...</div>
-        ) : transactions.length > 0 ? (
-          transactions.map((tx, idx) => {
+        ) : transactions.filter(tx => {
+            if (!searchTerm) return true;
+            const term = searchTerm.toLowerCase();
+            const typeStr = (tx.type || (tx.to === walletAddress ? 'Receive' : 'Send')).toLowerCase();
+            const assetStr = (tx.asset || (tx.asset_type === 'native' ? 'XLM' : 'Token')).toLowerCase();
+            const projectStr = (tx.project || '').toLowerCase();
+            return typeStr.includes(term) || assetStr.includes(term) || projectStr.includes(term);
+          }).length > 0 ? (
+          transactions.filter(tx => {
+            if (!searchTerm) return true;
+            const term = searchTerm.toLowerCase();
+            const typeStr = (tx.type || (tx.to === walletAddress ? 'Receive' : 'Send')).toLowerCase();
+            const assetStr = (tx.asset || (tx.asset_type === 'native' ? 'XLM' : 'Token')).toLowerCase();
+            const projectStr = (tx.project || '').toLowerCase();
+            return typeStr.includes(term) || assetStr.includes(term) || projectStr.includes(term);
+          }).map((tx, idx) => {
             // Simplified display logic
             // Robust display logic for real testnet and internal simulation
             const isInternal = !!tx.status;

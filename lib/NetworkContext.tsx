@@ -38,8 +38,8 @@ export function NetworkProvider({ children }: { children: React.ReactNode }) {
     : 'https://soroban-testnet.stellar.org';
 
   const explorerUrl = network === 'mainnet'
-    ? 'https://stellar.expert/explorer/testnet/contract/CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y'
-    : 'https://stellar.expert/explorer/testnet/contract/CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y';
+    ? `https://stellar.expert/explorer/public/contract/${contractId}`
+    : `https://stellar.expert/explorer/testnet/contract/${contractId}`;
 
   return (
     <NetworkContext.Provider value={{ network, setNetwork, contractId, rpcUrl, explorerUrl }}>
