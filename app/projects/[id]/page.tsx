@@ -9,7 +9,9 @@ import {
   ArrowRight,
   ShieldAlert,
   Wallet,
-  X
+  X,
+  Copy,
+  Check
 } from 'lucide-react';
 import globalStyles from '../../Dashboard.module.css';
 
@@ -36,6 +38,15 @@ export default function ProjectDetailsPage({ params }: PageProps) {
   
   const [txModalOpen, setTxModalOpen] = useState(false);
   const [txDetails, setTxDetails] = useState<any>(null);
+
+  const [copiedSpecs, setCopiedSpecs] = useState(false);
+
+  const handleCopySpecs = () => {
+    const specBrief = `Project Brief: ${projectData.title}\nClient: ${projectData.client}\nFreelancer: ${projectData.freelancer}\nBudget: ${projectData.budget} ${projectData.currency}\nCreated: ${projectData.createdAt}\nStatus: ${projectStatus}\nMilestones: 4 Total (${completedCount}/4 Completed)\nEscrow ID: 0x8a92...f21b\nPlatform: Trustlance Escrow (Stellar Network)`;
+    navigator.clipboard.writeText(specBrief);
+    setCopiedSpecs(true);
+    setTimeout(() => setCopiedSpecs(false), 2500);
+  };
 
   const handleOpenTxDetails = (milestoneTitle: string, amount: string) => {
     setTxDetails({
@@ -165,6 +176,28 @@ export default function ProjectDetailsPage({ params }: PageProps) {
               {projectStatus === 'Active' && <span className={styles.badgeActive}>Active</span>}
               {projectStatus === 'Disputed' && <span className={globalStyles.badgeDispute}>Disputed</span>}
               {projectStatus === 'Completed' && <span className={styles.badgeActive} style={{ backgroundColor: '#1b4733', color: '#4ade80' }}>Completed</span>}
+              <button 
+                onClick={handleCopySpecs}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: 'rgba(99, 102, 241, 0.12)',
+                  border: '1px solid rgba(99, 102, 241, 0.35)',
+                  color: '#a5b4fc',
+                  borderRadius: '8px',
+                  padding: '5px 12px',
+                  fontSize: '12px',
+                  fontWeight: 500,
+                  cursor: 'pointer',
+                  marginLeft: 'auto',
+                  transition: 'all 0.2s ease'
+                }}
+                title="Copy full project brief to clipboard"
+              >
+                {copiedSpecs ? <Check size={13} color="#4ade80" /> : <Copy size={13} />}
+                {copiedSpecs ? 'Copied Brief!' : 'Copy Spec Brief'}
+              </button>
             </div>
             <div className={styles.usersInfo}>
               <span>Client: <strong>{projectData.client}</strong></span>

@@ -328,6 +328,57 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <div className="animate-fade-in">
           {children}
         </div>
+
+        <footer style={{
+          marginTop: '60px',
+          padding: '24px 0',
+          borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '16px',
+          color: '#9ca3af',
+          fontSize: '13px'
+        }}>
+          <div>
+            <span>© 2026 Trustlance Protocol. Built on <strong>Stellar Soroban</strong>.</span>
+          </div>
+          <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+            <a 
+              href={FEEDBACK_FORM_LINK} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={{ color: '#818cf8', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px', fontWeight: 500 }}
+            >
+              💬 Submit Feedback
+            </a>
+            <a 
+              href="https://x.com/TrustlanceEscrow" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={{ color: '#9ca3af', textDecoration: 'none' }}
+            >
+              Twitter / X
+            </a>
+            <a 
+              href="https://github.com/Shrikant1a/StellarTrust" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={{ color: '#9ca3af', textDecoration: 'none' }}
+            >
+              GitHub
+            </a>
+            <a 
+              href="https://stellar.expert/explorer/testnet/contract/CBYNQF3RPZ2QNLUXS4BSGSC3CGXAXHPU32H7NMUIFJETYOR524SF6Y6Y" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={{ color: '#9ca3af', textDecoration: 'none' }}
+            >
+              Smart Contract
+            </a>
+          </div>
+        </footer>
       </main>
 
       {/* Settings Modal (Minimalist version) */}
